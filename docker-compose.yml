@@ -1,0 +1,34 @@
+version: '3.8'  # Specify the Docker Compose file version
+
+services:
+  mysql:
+    image: mysql:latest  # Use the latest MySQL image
+    container_name: mysql-container  # Name of the container
+    environment:
+      MYSQL_ROOT_PASSWORD: SQL.123456789  # Set root password
+      MYSQL_DATABASE: DB2  # Create a database
+    volumes:
+      - mysql_data:/var/lib/mysql  # Mount the volume to MySQL data directory
+    ports:
+      - "3306:3306"  # Expose MySQL port
+    restart: unless-stopped  # Restart policy
+    networks:
+      - my_custom_network  # Use the custom network
+
+  mail-dev:
+    container_name: mail-dev-bsn
+    image: maildev/maildev
+    ports:
+      - "1080:1080"
+      - "1025:1025"
+    networks:
+      - my_custom_network  # Use the custom network
+
+# Define the named volume for MySQL data
+volumes:
+  mysql_data:  # This creates a named volume called mysql_data
+
+# Define custom networks
+networks:
+  my_custom_network:
+    driver: bridge  # Use the bridge driver
