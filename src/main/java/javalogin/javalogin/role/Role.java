@@ -1,6 +1,5 @@
 package javalogin.javalogin.role;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import javalogin.javalogin.user.User;
 import lombok.*;
@@ -24,8 +23,7 @@ public class Role {
     private Integer id;
     @Column(unique = true)
     private String name;
-   @ManyToMany( mappedBy = "roles")
-   @JsonIgnore
+    @ManyToMany( mappedBy = "roles")
     private List<User> users;
 
     @CreatedDate

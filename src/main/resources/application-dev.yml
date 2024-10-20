@@ -6,33 +6,40 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: update  # Consider changing to 'validate' or 'none' for production
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
         format-sql: true
     database: mysql
-    database-platform: org.hibernate.dialect.MySQLDialect  # Change to MySQL8Dialect if using MySQL 8.x
+    database-platform: org.hibernate.dialect.MySQLDialect
   mail:
     host: localhost
     port: 1025
-    username: om  # Adjust as necessary
-    password: om   # Adjust as necessary
+    username:
+    password:
     properties:
       mail:
         smtp:
           trust: "*"
-          auth: true
+          auth: false
           starttls:
-            enable: true
+            enable: false
           connectiontimeout: 5000
           timeout: 3000
           writetimeout: 5000
+
 application:
   security:
     jwt:
       secret-key: fa28712b812578b3437a87f8f49f624c8605e2798b8a75b51713e5a4e2f0d381
-      expiration: 8640000  # Consider a shorter expiration time
+      expiration: 8640000
   mailing:
     frontend:
-      activation-url: https://localhost:4200/activate-account  # Fixed typo
+      activation-url: https://localhost:4200/activate-account
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG

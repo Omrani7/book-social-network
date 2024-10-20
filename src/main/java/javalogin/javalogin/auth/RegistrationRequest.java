@@ -13,7 +13,6 @@ import lombok.Setter;
 @Builder
 public class RegistrationRequest {
 
-
     @NotEmpty(message = "Firstname is mandatory")
     @NotNull(message = "Firstname is mandatory")
     private String firstname;
@@ -28,4 +27,5 @@ public class RegistrationRequest {
     @NotNull(message = "Password is mandatory")
     @Size(min = 8, message = "Password should be 8 characters long minimum")
     private String password;
+
 }

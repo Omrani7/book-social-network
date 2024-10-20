@@ -28,24 +28,25 @@ import java.util.stream.Collectors;
 
 public class User implements UserDetails, Principal {
 
- @Id
- @GeneratedValue
-  private Integer id;
-  private String firstname;
-  private String lastname;
-  private LocalDate birthDate;
-  @Column(unique = true)
-  private  String email;
-  private  String password;
-  private boolean accountLocked;
-  private boolean enabled;
+    @Id
+    @GeneratedValue
+    private Integer id;
+    private String firstname;
+    private String lastname;
+    private LocalDate birthDate;
+    @Column(unique = true)
+    private  String email;
+   @Column(name = "password" , nullable = false)
+    private  String password;
+    private boolean accountLocked;
+    private boolean enabled;
 
-  @ManyToMany(fetch = FetchType.EAGER)
-  private List<Role> roles;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Role> roles;
 
-  @CreatedDate
-  @Column (nullable = false,updatable = false)
-  private LocalDateTime createdDate;
+    @CreatedDate
+    @Column (nullable = false,updatable = false)
+    private LocalDateTime createdDate;
     @LastModifiedDate
     @Column (insertable = false)
     private LocalDateTime lastModifiedDate;
@@ -65,12 +66,12 @@ public class User implements UserDetails, Principal {
 
     @Override
     public String getPassword() {
-        return null;
+        return this.password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return this.email;
     }
 
     @Override

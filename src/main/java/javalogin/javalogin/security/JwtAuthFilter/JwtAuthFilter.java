@@ -24,20 +24,20 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 @RequiredArgsConstructor
 public class JwtAuthFilter  extends OncePerRequestFilter {
 
- private  final JwtService jwtService;
+    private  final JwtService jwtService;
     private  final UserDetailsService userDetailsService;
 
     @Override
     protected void doFilterInternal(
-           @NonNull HttpServletRequest request,
-           @NonNull HttpServletResponse response,
+            @NonNull HttpServletRequest request,
+            @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain) throws ServletException, IOException {
 
         if (request.getServletPath().contains("/api/v1/auth")) {
 
-        filterChain.doFilter(request,response);
-        return;}
-          final String authHeader = request.getHeader(AUTHORIZATION);
+            filterChain.doFilter(request,response);
+            return;}
+        final String authHeader = request.getHeader(AUTHORIZATION);
         final String jwt ;
         final String userEmail;
         if(authHeader==null || !authHeader.startsWith("Bearer")){
@@ -62,7 +62,6 @@ public class JwtAuthFilter  extends OncePerRequestFilter {
             }
         }
         filterChain.doFilter(request, response);
-        }
-
     }
 
+}
