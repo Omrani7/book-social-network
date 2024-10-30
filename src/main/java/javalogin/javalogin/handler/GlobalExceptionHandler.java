@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.LockedException;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -12,8 +13,14 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.HashSet;
 import java.util.Set;
 
-import static javalogin.javalogin.handler.BusinessErrorCodes.*;
-import static org.springframework.http.HttpStatus.*;
+
+import static javalogin.javalogin.handler.BusinessErrorCodes.ACCOUNT_DISABLED;
+import static javalogin.javalogin.handler.BusinessErrorCodes.ACCOUNT_LOCKED;
+import static javalogin.javalogin.handler.BusinessErrorCodes.BAD_CREDENTIALS;
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
+
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -77,7 +84,7 @@ public class GlobalExceptionHandler {
         Set<String> errors = new HashSet<>();
         exp.getBindingResult().getAllErrors()
                 .forEach(error -> {
-                    //var fieldName = ((FieldError) error).getField();
+                    var fieldName = ((FieldError) error).getField();
                     var errorMessage = error.getDefaultMessage();
                     errors.add(errorMessage);
                 });
@@ -102,4 +109,6 @@ public class GlobalExceptionHandler {
                                 .error(exp.getMessage())
                                 .build()
                 );
-    }}
+    }
+
+ }

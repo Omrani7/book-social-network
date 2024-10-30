@@ -10,6 +10,8 @@ import lombok.Setter;
 import java.util.Map;
 import java.util.Set;
 
+
+
 @Getter
 @Setter
 @Builder
@@ -22,5 +24,4 @@ public class ExceptionResponse {
     private String businessErrorDescription;
     private String error;
     private Set<String> validationErrors;
-    private Map<String, String> errors;
-}
+    private Map<String, String> errors;}
